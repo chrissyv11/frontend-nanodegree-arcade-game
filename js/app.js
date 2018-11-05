@@ -53,10 +53,12 @@ Player.prototype.render = function() {
 
 // CV Handle user input on player.  Receive user input, allowedKeys
 //(the key which was pressed) and move the player accordingly (left, right)
-// Player cannot move off screen (check for that and handle)
-// When player reaches water, game is reset by moving player to initial location
-// Write a separate reset Player method
-Player.prototype.handleInput = function
+// CV Player cannot move off screen (check for that and handle)
+// CV When player reaches water, game is reset by moving player to initial location
+// CV Write a separate reset Player method
+Player.prototype.handleInput = function{
+  
+}
 
 // Now instantiate your objects.
 // Create several new Enemies and place them in an array called allEnemies
