@@ -8,6 +8,7 @@ var Enemy = function(x, y, speed) {
     // CV Set initial location
     this.x = x;
     this.y = y;
+    this.xMax = 505;
     // CV Set speed
     this.speed = speed;
 };
@@ -18,9 +19,11 @@ Enemy.prototype.update = function(dt) {
     // Multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += this.speed * dt;
-    this.speed = Math.floor(Math.random() * 3 + 1);
-    if(this.x > 505){
+  //  this.speed = Math.floor(Math.random() * 3 + 1);
+    if(this.x < this.xMax){
+      this.x += this.speed * dt;
+    }
+    else {
       this.x = 0;
     }
     // CV Handle collision with the Player
@@ -38,8 +41,8 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.sprite = 'images/char-cat-girl.png';
     // CV Set initial location
-    this.x = 252;
-    this.y = 596;
+    this.x = 202;
+    this.y = 400;
     // Set length of step
     this.horizStep = 101;
     this.vertStep = 83;
@@ -48,15 +51,12 @@ var Player = function() {
 // CV Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    // CV Handle collision with the Player
+
 };
 
 Player.prototype.resetPlayer = function(){
-  this.x = 252;
-  this.y = 596;
+  this.x = 202;
+  this.y = 400;
 }
 // Draw the player on the screen
 Player.prototype.render = function() {
@@ -98,14 +98,12 @@ Player.prototype.handleInput = function(input) {
 // Place all enemy objects in an array called allEnemies
 // CV Place the player object in a variable called player
 const player = new Player ();
-const enemy1 = new Enemy ();
-const enemy2 = new Enemy ();
-const enemy3 = new Enemy ();
-//player.render();
-//enemy1.render();
-//enemy2.render();
-//enemy3.render();
-const allEnemies = [enemy1, enemy2, enemy3];
+const enemy1 = new Enemy (0, 83, 80);
+const enemy2 = new Enemy (0, 166, 100);
+const enemy3 = new Enemy (101, 83, 110);
+
+const allEnemies = [];
+allEnemies.push(enemy1, enemy2, enemy3);
 
 
 // This listens for key presses and sends the keys to your
