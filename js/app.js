@@ -1,9 +1,8 @@
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+    // Variables applied to each of our instances
     // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // a helper to easily load images
     this.sprite = 'images/enemy-bug.png';
     // CV Set initial location
     this.x = x;
@@ -19,7 +18,6 @@ Enemy.prototype.update = function(dt) {
     // Multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-  //  this.speed = Math.floor(Math.random() * 3 + 1);
     if(this.x < this.xMax){
       this.x += this.speed * dt;
     }
@@ -33,7 +31,7 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
+// Player Class
 // This class requires an update(), render() and
 // a handleInput() method.
 
@@ -50,7 +48,6 @@ var Player = function() {
 
 // CV Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
-// CV Handle collision with the Enemy
 Player.prototype.update = function(dt) {
 // CV Handle collision with the Enemy
   for(let enemy of allEnemies){
@@ -68,6 +65,7 @@ Player.prototype.update = function(dt) {
   }
 };
 
+// Player gets reset to bottom of screen
 Player.prototype.resetPlayer = function(){
   this.x = 202;
   this.y = 400;
@@ -79,9 +77,7 @@ Player.prototype.render = function() {
 
 // CV Handle user input on player.  Receive user input, allowedKeys
 //(the key which was pressed) and move the player accordingly (left, right)
-// CV Player cannot move off screen (check for that and handle)
-// CV When player reaches water, game is reset by moving player to initial location
-// CV Write a separate reset Player method
+// CV Player cannot move off screen
 Player.prototype.handleInput = function(input) {
   switch(input){
     case 'left':
@@ -107,9 +103,8 @@ Player.prototype.handleInput = function(input) {
     }
 };
 
-// Now instantiate your objects.
+// Instantiate objects.
 // Create several new Enemies and place them in an array called allEnemies
-// Place all enemy objects in an array called allEnemies
 // CV Place the player object in a variable called player
 const player = new Player ();
 const enemy1 = new Enemy (0, 68, 80);
@@ -121,7 +116,7 @@ allEnemies.push(enemy1, enemy2, enemy3);
 
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
