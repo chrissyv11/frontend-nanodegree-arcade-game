@@ -26,7 +26,6 @@ Enemy.prototype.update = function(dt) {
     else {
       this.x = 0;
     }
-    // CV Handle collision with the Player
 };
 
 // Draw the enemy on the screen, required method for game
@@ -46,12 +45,27 @@ var Player = function() {
     // Set length of step
     this.horizStep = 101;
     this.vertStep = 83;
+    this.win = false;
 };
 
 // CV Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
+// CV Handle collision with the Enemy
 Player.prototype.update = function(dt) {
-
+// CV Handle collision with the Enemy
+  for(let enemy of allEnemies){
+    var xDiff = Math.abs(this.x - enemy.x);
+    var yDiff = Math.abs(this.y - enemy.y);
+    if (xDiff < 20 && yDiff < 20) {
+      this.resetPlayer();
+    }
+  }
+// CV Check if player has reached river
+  if (this.y < 68) {
+    this.win = true
+    alert('You Win!!!');
+    this.resetPlayer();
+  }
 };
 
 Player.prototype.resetPlayer = function(){
@@ -98,9 +112,9 @@ Player.prototype.handleInput = function(input) {
 // Place all enemy objects in an array called allEnemies
 // CV Place the player object in a variable called player
 const player = new Player ();
-const enemy1 = new Enemy (0, 83, 80);
-const enemy2 = new Enemy (0, 166, 100);
-const enemy3 = new Enemy (101, 83, 110);
+const enemy1 = new Enemy (0, 68, 80);
+const enemy2 = new Enemy (0, 151, 100);
+const enemy3 = new Enemy (101, 68, 110);
 
 const allEnemies = [];
 allEnemies.push(enemy1, enemy2, enemy3);
